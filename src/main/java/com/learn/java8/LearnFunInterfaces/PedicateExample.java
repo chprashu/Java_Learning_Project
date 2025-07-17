@@ -38,8 +38,6 @@ public class PedicateExample {
 
 
         /***Predicate Default Methods */
-        Predicate<String> test = (str) -> str.isEmpty();
-
         Predicate<Employee> emp = (employee) -> employee.name.equals("Harish");
         Predicate<Employee> emp1 = (employee) -> employee.department.equals("It");
         Predicate<Employee> res = emp.and(emp1);
