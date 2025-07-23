@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class MapMethodExample {
 
-    /**
+    /*
      * map accepts Function as an argument
      * return lazy Stream
      * map(Function<T, R>)
