@@ -9,17 +9,17 @@ public class ConsumerDefaultMethodImpl {
      * andThen
      */
 
-    private static void implAndThen(String str) {
+    private static void implAndThen() {
         Consumer<String> c1 = s -> System.out.println("Hello " + s);
         Consumer<String> c2 = s -> System.out.println("Email sent successfully " + s);
 
         Consumer<String> finalRes = c1.andThen(c2);
-        finalRes.accept(str);
+        finalRes.accept("Prashanth");
 
     }
 
     public static void main(String[] args) {
 
-        implAndThen("Prashanth");
+        implAndThen();
     }
 }

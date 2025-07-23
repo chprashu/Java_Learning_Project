@@ -21,11 +21,11 @@ public class FilterMethodExample {
         Stream<String> stream1 = courses.stream();
 
         Predicate<String> Predicate1 = (s) -> s.contains("J"); // Predicate which will return true if String contains J
-        stream1.filter(Predicate1).forEach(x -> System.out.println(x));
-        System.out.println('\n');
+        stream1.filter(Predicate1).forEach(System.out::println);
+        System.out.println();
 
         /** defining predicate as a argument */
-        courses.stream().filter(s -> s.contains("J")).forEach(x -> System.out.println(x));
-        System.out.println('\n');
+        courses.stream().filter(s -> s.contains("J")).forEach(System.out::println);
+        System.out.println();
     }
 }

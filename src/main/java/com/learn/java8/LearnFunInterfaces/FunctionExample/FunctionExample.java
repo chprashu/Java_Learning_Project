@@ -24,17 +24,12 @@ public class FunctionExample {
         System.out.println(exe1.apply("Java Development") + "\n****************\n");
 
         /** Slightly modified way to implement Function */
-        Function<String, Integer> exe2 = str -> str.length();
+        Function<String, Integer> exe2 = String::length;
         System.out.println(exe2.apply("Java Development") + "\n****************\n");
 
         /** utilization of Function interface as a Parameter */
-        System.out.println(FunctionExample.transform(17, s -> {
-            if (s % 2 > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }));
+        Function<Integer, Boolean> fun1 = s -> s % 2 == 0;
+        System.out.println((Integer) FunctionExample.transform("Prashanth", String::length));
         System.out.println("*****************\n");
 
     }
