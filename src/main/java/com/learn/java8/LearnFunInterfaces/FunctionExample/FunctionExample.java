@@ -28,7 +28,6 @@ public class FunctionExample {
         System.out.println(exe2.apply("Java Development") + "\n****************\n");
 
         /** utilization of Function interface as a Parameter */
-        Function<Integer, Boolean> fun1 = s -> s % 2 == 0;
         System.out.println((Integer) FunctionExample.transform("Prashanth", String::length));
         System.out.println("*****************\n");
 
