@@ -18,7 +18,7 @@ public class StreamAPIExample {
      * 
      * intermediate ops helps to do certain opertaions like filter(), sort(), map(),
      * flatMap(), sorted(), limit(), skip() etc.
-     * intermediate operations works lazyly, and calls once termila opertaion calls
+     * intermediate operations works lazily, and calls once termila opertaion calls
      * 
      * 
      * terminal ops helps to terminate the Stream by giving the desired output
