@@ -1,6 +1,6 @@
 package com.learn.java8.LearnStreamAPI.IntermediateOpsMethods;
 
-public class Readme {
+public class AReadme {
     /**
      * every Intermediate Operations will return Stream<T>
      * Intermediate Operations works Lazily
