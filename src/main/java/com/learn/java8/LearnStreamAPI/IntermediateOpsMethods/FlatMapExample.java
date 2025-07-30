@@ -64,12 +64,20 @@ public class FlatMapExample {
                 new User("Bob", List.of("bob@yahoo.com")),
                 new User("Charlie", List.of("charlie@gmail.com", "charlie@home.io")),
                 new User("Dave", List.of("dave@gmail.com", "dave@work.org")));
-        Map<String, List<String>> usersByDomine = users1.stream()
-                .flatMap(user -> user.getEmails().stream()
+        Map<String, List<String>> collect = users1.stream().flatMap(user -> user.getEmails().stream()
                         .map(email -> Map.entry(email.split("@")[1], user.getName())))
-                .collect(Collectors.groupingBy(Map.Entry::getKey,
-                        Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
-        System.out.println(usersByDomine);
+//                .forEach(System.out::println);
+                .collect(Collectors.groupingBy(Map.Entry::getKey,Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
+        System.out.println(collect);
+        System.out.println();
+
+        /*
+         * Count number of users per domain?
+         */
+        Map<String, Long> collect1 = users1.stream().flatMap(user -> user.getEmails().stream()
+                        .map(email -> Map.entry(email.split("@")[1], user.getName())))
+                .collect(Collectors.groupingBy(Map.Entry::getKey, Collectors.mapping(Map.Entry::getValue, Collectors.counting())));
+        System.out.println(collect1);
         System.out.println();
 
     }

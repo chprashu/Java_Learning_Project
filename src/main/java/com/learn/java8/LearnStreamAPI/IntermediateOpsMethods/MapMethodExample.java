@@ -1,8 +1,7 @@
 package com.learn.java8.LearnStreamAPI.IntermediateOpsMethods;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MapMethodExample {
@@ -164,6 +163,7 @@ public class MapMethodExample {
             }
             return true;
         }).forEach(System.out::println);
+        System.out.println();
 
         /*
          * Anagram Signature
@@ -175,5 +175,18 @@ public class MapMethodExample {
             return word;
         }).forEach(System.out::println);
         System.out.println();
+
+
+        String[] duplicate_strings = {
+        "apple", "banana", "cherry", "apple",
+                "banana", "date", "fig", "grape",
+                "cherry", "fig", "honeydew", "kiwi",
+                "lemon", "mango", "kiwi", "nectarine",
+                "orange", "papaya", "lemon", "mango"};
+
+        Map<String, Integer> duplicateCounter = new HashMap<>();
+        Arrays.stream(duplicate_strings).forEach(str -> duplicateCounter.put(str, duplicateCounter.getOrDefault(str, 0)+1));
+        System.out.println(duplicateCounter);
+
     }
 }
