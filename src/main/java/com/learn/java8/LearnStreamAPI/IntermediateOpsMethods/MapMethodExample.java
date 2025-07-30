@@ -175,6 +175,5 @@ public class MapMethodExample {
             return word;
         }).forEach(System.out::println);
         System.out.println();
-
     }
 }
