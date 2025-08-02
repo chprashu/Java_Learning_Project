@@ -1,6 +1,5 @@
 package com.learn.java8.LearnStreamAPI.IntermediateOpsMethods;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -176,16 +175,16 @@ public class MapMethodExample {
         }).forEach(System.out::println);
         System.out.println();
 
-
         String[] duplicate_strings = {
-        "apple", "banana", "cherry", "apple",
+                "apple", "banana", "cherry", "apple",
                 "banana", "date", "fig", "grape",
                 "cherry", "fig", "honeydew", "kiwi",
                 "lemon", "mango", "kiwi", "nectarine",
-                "orange", "papaya", "lemon", "mango"};
+                "orange", "papaya", "lemon", "mango" };
 
         Map<String, Integer> duplicateCounter = new HashMap<>();
-        Arrays.stream(duplicate_strings).forEach(str -> duplicateCounter.put(str, duplicateCounter.getOrDefault(str, 0)+1));
+        Arrays.stream(duplicate_strings)
+                .forEach(str -> duplicateCounter.put(str, duplicateCounter.getOrDefault(str, 0) + 1));
         System.out.println(duplicateCounter);
 
     }
