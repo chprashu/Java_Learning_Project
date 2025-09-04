@@ -1,4 +1,4 @@
-package com.learn.Spring.Concepts.tightCoupling;
+package com.learn.Spring.tightCoupling;
 
 public class User {
     public Integer id;

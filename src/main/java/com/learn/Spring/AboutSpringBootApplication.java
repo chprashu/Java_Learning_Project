@@ -1,4 +1,4 @@
-package com.learn.Spring.Concepts;
+package com.learn.Spring;
 
 public interface AboutSpringBootApplication {
 
