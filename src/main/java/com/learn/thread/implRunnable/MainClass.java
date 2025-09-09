@@ -2,12 +2,6 @@ package com.learn.thread.implRunnable;
 
 public class MainClass {
 
-    private static void addToList(PrintList printList) {
-        for (int i = 0; i < 100000; i++) {
-            printList.addToStrings(String.valueOf(i));
-        }
-    }
-
     public static void main(String[] args) {
 
         PrintList printList = new PrintList();
