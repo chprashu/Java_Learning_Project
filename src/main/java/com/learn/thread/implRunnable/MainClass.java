@@ -6,6 +6,9 @@ public class MainClass {
 
         PrintList printList = new PrintList();
 
+        /*
+            implementing Runnable with anonymous class by implementing single overridable method
+         */
         Runnable t1Thread = new Runnable() {
             @Override
             public void run() {
@@ -35,16 +38,22 @@ public class MainClass {
         long endTime = System.nanoTime();
         System.out.println((endTime - startTime) / 10_00_00.00);
 
-        Runnable testThread1 = new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 10; i++) {
-                    System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getPriority()
-                            + " count:" + i);
-                }
+        /*
+            implementing runnable with lambda, since runnable with have only one abstract method (FunctionalInterface)
+         */
+        Runnable testThread1 = () -> {
+            for (int i = 0; i < 10; i++) {
+                System.out.println(Thread.currentThread().getName() + " " + Thread.currentThread().getPriority()
+                        + " count:" + i);
             }
         };
 
+        /*
+            Priority will help Operating system scheduler to set priority based execution for the threads.
+            MIN_PRIORITY, 1
+            NORM_PRIORITY, 5
+            MAX_PRIORITY, 10
+         */
         Thread minPrioThread = new Thread(testThread1, "LOW");
         Thread normPrioThread = new Thread(testThread1, "MED");
         Thread maxPrioThread = new Thread(testThread1, "HIGH");
@@ -62,16 +71,22 @@ public class MainClass {
             throw new RuntimeException(e);
         }
 
-        Runnable demonThread = new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    System.out.println("Hello World");
-                }
-            }
-        };
+        /*
+            A thread can be called as demon thread, only when it has an unfinished process
+            eg, while(true) will never going to end its process
 
-        Thread demon = new Thread(demonThread, "DEMON");
+            Since Runnable itself can be created using lambda we directly use it inside new Thread as below described.
+         */
+        Thread demon = new Thread(() ->{
+            while (true) {
+                System.out.println("Hello World");
+            }
+        }, "DEMON");
+
+        /*
+            Although it is having an unfinished process, thread should not kill itself.
+            if we set setDaemon(true) then Thread can be considered as Daemon Thread
+         */
         demon.setDaemon(true);
         demon.start();
 
