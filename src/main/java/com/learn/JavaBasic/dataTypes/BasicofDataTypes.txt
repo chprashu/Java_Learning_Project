@@ -1,0 +1,25 @@
+Data types will have two types:
+    1. Primitive
+    2. Non-Primitive
+
+Primitive Data types: 
+    * These types are not objects, JVM directly allocates the memory to these data types.
+    1.byte – 8-bit integer 1-bytes 
+    2.short - 16-bit integer 2-bytes
+    3.int - 32-bit integer 4-bytes
+    4.long - 64-bit integer 8-bytes
+    5.float - 32-bit floating-point 4-bytes
+    6.double - 64-bit floating-point 8-bytes
+    7.char - 16-bit floating-point 2-bytes
+    8.boolean - true or false
+
+    every bit holds -2^(bit - 1) to 2^(bit - 1) values as MIN and MAX values
+
+    eg:
+    int x = 10 -> 10 doesn't have any address, JVM allocates 32-bit memory to x reference
+
+    * Primitive data types are immutable means
+    eg:
+    int x = 10 -> int holds -2^7 to 2^7 values as MIN and MAX, so 10 comes under 2^7 this means 
+    when x = 10, since 10 lies between MIN and MAX value an binary allocation happens to this like
+    binary representaion 10 (00000000 00000000 00000000 00001010)
