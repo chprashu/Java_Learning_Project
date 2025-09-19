@@ -121,6 +121,47 @@ public class PrimitiveTest {
          */
         test(num);
         System.out.println("After: " + num); // 10
+
+        /*
+         * Boxing concepts
+         * Autoboxing: automatic conversion of primitive type to its corresponding
+         * wrapper class.
+         * Boxing is conversion of primitive type to its corresponding wrapper class.
+         * Unboxing: automatic conversion of wrapper class to its corresponding
+         * primitive type.
+         * 
+         * Wrapper classes are invented to use primitive data types as objects.
+         * They are stored in heap memory.
+         * They have methods to perform various operations. eg: Integer.parseInt(),
+         * Double.isNaN() etc.
+         * They are used in collections like ArrayList, HashMap etc. because collections
+         * can only
+         * allow objects, not primitive data types.
+         * 
+         * Wrapper classes are immutable because their internal value is set only once
+         * at the time of object creation
+         * and cannot be changed afterwards. This ensures thread safety and allows safe
+         * sharing of instances.
+         */
+
+        // Autoboxing (Primitive to Object) -> Boxing
+        /*
+         * Here, the primitive int value 42 is automatically converted to an Integer object.
+         * AutoBoxing is done by the compiler.
+         * 
+         * 
+         */
+        Integer boxedInt = 42; // int to Integer
+        
+        Double boxedDouble = 3.14; // double to Double
+
+        // Unboxing (Object to Primitive)
+        /*
+         * Here, the Integer object boxedInt is automatically converted back to a primitive int.
+         * UnBoxing is done by the compiler.
+         */
+        int unboxedInt = boxedInt; // Integer to int
+        
     }
 
     public static void test(int num) {
