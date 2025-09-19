@@ -1,6 +1,16 @@
 API (Application Programming Interface): 
     * Is a set of definitions not implementations.
     * definitions can be contracts, method signatures, rules 
+    * It can use any protocals like HTTP, TCP, SOAP, JMS, gRPC etc.
+    * Can use XML, JSON, binary, or custom formats.
+    * General set of rules, no strict architecture.
+    * Broad (includes REST, SOAP, GraphQL, gRPC).
+    * eg. JDBC API, Java APIs, Windows API, Payment Gateway API.
+    * API represts the Library
+
+    1. Can an API exist without implementation?
+        Yes it can exists without implementation but to use it there has to be an implementation
+        eg. public interface List<T>, to use it we have to use any of the list collection. 
     
     It tells you:
         1. What functions are available.
@@ -19,4 +29,7 @@ API (Application Programming Interface):
         Streams.forEach(Consumer<T> consumer)
         Streams.filter(Predicate<T> predicate)
         Streams.map(Function<T, R> function)
-        Streams.
+
+REST(Reprsentational State Transfer) API: REST API also works same as API but this have some rules, while communicating
+                                        
+
