@@ -1,0 +1,22 @@
+API (Application Programming Interface): 
+    * Is a set of definitions not implementations.
+    * definitions can be contracts, method signatures, rules 
+    
+    It tells you:
+        1. What functions are available.
+        2. How to call them.
+        3. What kind of results are you can expect.
+
+    eg:
+        Java -> Collections is an API 
+        Collections will have so many methods like 
+        Collections.sort(list)
+        Collections.emptyList(list)
+        Collections.reverse(list)
+
+        Java -> Streams is an API
+        Streams will have so many such methods like
+        Streams.forEach(Consumer<T> consumer)
+        Streams.filter(Predicate<T> predicate)
+        Streams.map(Function<T, R> function)
+        Streams.

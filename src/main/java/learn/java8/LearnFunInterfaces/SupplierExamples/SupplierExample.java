@@ -5,11 +5,13 @@ import java.util.function.Supplier;
 public class SupplierExample {
 
     /**
-     * Supplier returns the type you mentioned
-     * it doesn't accept any arguments
+     * Supplier returns a value of the specified type.
+     * It does not accept any arguments.
      * 
-     * usecases are
-     * common otp generation, etc
+     * Use cases include:
+     * - OTP generation
+     * - Lazy value initialization
+     * - Supplying values in Streams
      */
 
     public static void main(String[] args) {

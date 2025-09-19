@@ -1,5 +1,6 @@
 package learn.java8.LearnFunInterfaces.PredicateExample;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import learn.java8.TestModals.Employee;
@@ -40,7 +41,29 @@ class PredicateExample {
         Predicate<Employee> emp1 = (employee) -> employee.department.equals("It");
         Predicate<Employee> res = emp.and(emp1);
         System.out.println(res.test(new Employee()));
-        ;
 
+        /*
+         * Predicate usage in Stream API filter method
+         * filter method accept Predicate as argument
+         */
+        System.out.println("Predicate usage in Stream API filter method ended here.... \n");
+        /*
+         * Checking even number using Predicate
+         * Checking prime number using Predicate
+         */
+        Predicate<Integer> checkEven = i -> i % 2 == 0;
+        Predicate<Integer> checkPrime = i -> {
+            for (int j = 2; j <= i / 2; j++) {
+                if (i % j == 0) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        int[] arr = { 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+        System.out.print("Even Numbers are : ");
+        Arrays.stream(arr).filter(checkEven::test).forEach(x -> System.out.print(x + " "));
+        System.out.print("\nPrime Numbers are : ");
+        Arrays.stream(arr).filter(checkPrime::test).forEach(x -> System.out.print(x + " "));
     }
 }
