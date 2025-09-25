@@ -30,6 +30,63 @@ API (Application Programming Interface):
         Streams.filter(Predicate<T> predicate)
         Streams.map(Function<T, R> function)
 
-REST(Reprsentational State Transfer) API: REST API also works same as API but this have some rules, while communicating
+REST(Reprsentational State Transfer) API: REST API also works same as API but this have some rules.
+
+    * A REST API follows REST architectural style, communication between client and server happens through 
+    HTTP Protocol.
+
+    key Principles of HTTP:
+        1. Client-Server Architecture: Client and Server are separate, communication happens through request/responses
+        2. Statelessness: Each request contains all the information needed (Server doesn't remember previous request)
+            eg: auth token has sent through an previous request, when the next request is calling where this request also 
+            needs authorize means we have to send through request headers, browser won't take from previous request. although 
+            both request are hitting same server.
+        3. Uniform interface: Consistent way of accessing resourses.
+        4. Resourse based: Everything is treated as a resourse and accessed using URLs(Uniform Resourse Identifiers);
+        6. HTTP Methods are used for operations.
+            * GET -> Read
+            * POST -> Create
+            * PUT -> Update
+            * DELETE -> Delete  
+        7. REST API Response and Request can be any formats
+            eg: 
+                1. JSON (JavaScript Object Notation)
+                    { "id": 1, "name": "kiran" }
+                2. XML (eXtensible Markup Language)
+                    <user>
+                        <id>1</id>
+                        <name>kiran</name>
+                    </user>
+                3. YML (Yet Another Markup Language)
+                    id: 1
+                    name: kiran
+                4. Plain Text / HTML
+                5. Binary (images, files, PDFs, etc)
+        
+        6. This Server(through Request)  and Client(through Response) can get to know through
+            Content-Type in Request and Response (headers)
+            eg: For
+                1. Query parameters / Path Variables
+                    eg: GET user/getUser?id=1 (Query parameter)
+                        GET user/getUser/1 (path variable)
+
+                2. JSON
+                    Content-Type: application/JSON
+
+                3. Form Data
+                    Content-Type: application/x-www-form-urlencoded(HTML forms style)
+                    Content-Type: multipart/form-data (user for file uploads)
+                
+                4. XML
+                    Content-Type: application/xml   
+                    Content-Type: application/yaml
+                
+                5. Binary Data  
+                    Content-Type: image/jpeg
+
+                6. Plain Text
+                    Conent-Type: text/plain
+                
+
                                         
 

@@ -98,6 +98,5 @@ public class MainClass {
         System.out.println(Thread.currentThread().getName() + " thread do something");
 
         System.out.println("DEMON Thread state: " + demon.getState());
-
     }
 }
