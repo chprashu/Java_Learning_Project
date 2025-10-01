@@ -2,6 +2,9 @@ server:
   port: 7500
 
 management:
+  health:
+    diskspace:
+      enabled: false
   endpoints:
     web:
       exposure:
@@ -9,6 +12,7 @@ management:
   endpoint:
     health:
       show-details: always
+      
   # server:
   #   port: 7503
 

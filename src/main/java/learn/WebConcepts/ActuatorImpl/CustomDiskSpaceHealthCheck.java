@@ -6,8 +6,8 @@ import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 
-@Component
-public class CustomHealthAlertSys implements HealthIndicator {
+@Component("custom_disk_space")
+public class CustomDiskSpaceHealthCheck implements HealthIndicator {
 
     private final long threshold = 50 * 1024 * 1024; // 50 MB
 
