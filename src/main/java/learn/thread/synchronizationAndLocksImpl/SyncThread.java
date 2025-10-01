@@ -1,4 +1,4 @@
-package learn.thread.synchronization;
+package learn.thread.synchronizationAndLocksImpl;
 
 public class SyncThread extends Thread {
 

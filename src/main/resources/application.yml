@@ -1,4 +1,19 @@
 server:
   port: 7500
 
+management:
+  health:
+    diskspace:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus, matrics, beans, env, shutdown, loggers
+  endpoint:
+    health:
+      show-details: always
+      
+  # server:
+  #   port: 7503
+
  
