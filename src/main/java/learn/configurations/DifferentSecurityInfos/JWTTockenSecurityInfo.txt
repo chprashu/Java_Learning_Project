@@ -1,0 +1,8 @@
+JWT (JSON web token):
+    overview,
+        * JWT token helps REST APIs to authenticate once by username and password
+        and generate a signed token which can help server to validate the request
+        without sending username and password every time.
+        * Server validates token signature and claims, treats the request as authenticated.
+        * it allows stateless servers (no session state stored on the server)
+

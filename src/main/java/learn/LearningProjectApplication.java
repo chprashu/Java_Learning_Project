@@ -73,7 +73,7 @@ public class LearningProjectApplication {
 	 * @ComponentScan to automatically scan all sub-packages for components,
 	 * configurations, and services.
 	 * 
-	 * @Configuaration and @EnableAutoConfiguration will also be applied to the
+	 * @Configuration and @EnableAutoConfiguration will also be applied to the
 	 * entire application. since
 	 * all the other packages are present in inside the root package.
 	 * 
@@ -83,7 +83,7 @@ public class LearningProjectApplication {
 	 * and @ComponentScan won't be applied automatically.
 	 * if No-AutoConfiguration is present:
 	 * we may need to manually configure beans and settings.
-	 * and deafult configurations like seeting up embedded tomcat server, Data
+	 * and default configurations like setting up embedded tomcat server, Data
 	 * source is wee added hibernate related dependency
 	 * like Spring-JPA, not done.
 	 * If you don’t use @ComponentScan (or specify it manually): Spring won’t detect

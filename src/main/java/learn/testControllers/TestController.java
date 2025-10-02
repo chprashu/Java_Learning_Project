@@ -22,4 +22,9 @@ public class TestController {
         }
     }
 
+    @GetMapping("/apiTest")
+    public String getMethodName() {
+        return "working";
+    }
+
 }
