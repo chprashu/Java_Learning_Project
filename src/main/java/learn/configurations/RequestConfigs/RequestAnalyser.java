@@ -1,4 +1,4 @@
-package learn.configurations;
+package learn.configurations.RequestConfigs;
 
 import java.io.IOException;
 
