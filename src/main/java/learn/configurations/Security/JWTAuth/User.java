@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -24,9 +22,9 @@ public class User {
 
     @Override
     public boolean equals(Object obj) {
-        if(this.id == null)
+        if (this.id == null)
             return false;
-        if(obj instanceof User && ((User) obj).id != null){
+        if (obj instanceof User && ((User) obj).id != null) {
             return this.id == ((User) obj).id;
         }
         return false;

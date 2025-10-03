@@ -26,6 +26,7 @@ public class RequestAnalyser extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             log.error(e.getMessage());
+            e.printStackTrace();
         } finally {
             long duration = System.currentTimeMillis() - start;
             String message = request.getMethod() + " " + request.getRequestURI() + " " + response.getStatus() + " "

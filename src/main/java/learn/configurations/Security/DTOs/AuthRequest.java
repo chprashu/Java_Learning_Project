@@ -1,4 +1,4 @@
-package learn.configurations.Security.JWTAuth.DTOs;
+package learn.configurations.Security.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

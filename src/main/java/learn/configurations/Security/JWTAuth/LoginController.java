@@ -1,9 +1,6 @@
 package learn.configurations.Security.JWTAuth;
 
-import learn.configurations.Security.JWTAuth.DTOs.AuthRequest;
-import learn.configurations.Security.JWTAuth.DTOs.AuthResponse;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,9 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import learn.configurations.Security.DTOs.AuthRequest;
+
 import java.util.List;
 
-@RestController
+// @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor
 public class LoginController {
@@ -26,8 +25,8 @@ public class LoginController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user){
-        if(jpaUserDetaiilsService.checkUser(user)){
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        if (jpaUserDetaiilsService.checkUser(user)) {
             return new ResponseEntity<>(jpaUserDetaiilsService.getUser(user.getId()), HttpStatus.OK);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -35,7 +34,7 @@ public class LoginController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest){
+    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -44,12 +43,12 @@ public class LoginController {
     }
 
     @GetMapping("/encodePwd")
-    public ResponseEntity<String> getEncodedPassword(@RequestParam("password") String password){
+    public ResponseEntity<String> getEncodedPassword(@RequestParam("password") String password) {
         return ResponseEntity.ok(passwordEncoder.encode(password));
     }
 
     @GetMapping("/users")
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return jpaUserDetaiilsService.getUsers();
     }
 

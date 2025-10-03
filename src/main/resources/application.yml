@@ -12,8 +12,13 @@ management:
   endpoint:
     health:
       show-details: always
-      
   # server:
   #   port: 7503
+
+spring:
+  security:
+    user:
+      name: user
+      password: admin@123
 
  

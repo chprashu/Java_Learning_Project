@@ -4,14 +4,12 @@ import lombok.Getter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Getter
-@Service
+// @Service
 public class JpaUserDetaiilsService implements UserDetailsService {
 
     List<User> users = new ArrayList<>();
@@ -30,14 +28,13 @@ public class JpaUserDetaiilsService implements UserDetailsService {
         return user;
     }
 
-    public boolean checkUser(User user){
+    public boolean checkUser(User user) {
         return users.contains(user);
     }
 
-    public User getUser(Integer id){
+    public User getUser(Integer id) {
         Optional<User> first = users.stream().filter(user -> user.getId() == id).findFirst();
         return first.orElse(null);
     }
-
 
 }
