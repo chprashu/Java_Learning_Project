@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @Slf4j
-// @RequestMapping("/test")
+ @RequestMapping("/test")
 public class TestController {
 
-    @GetMapping("/apiTest")
+    @GetMapping("/")
     public ResponseEntity<String> testMethod() {
         try {
             int i = 1 / 0;
@@ -29,7 +29,7 @@ public class TestController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("/apiTest")
     public String getMethodName(HttpServletRequest request) {
         return "working with ID: " + request.getSession().getId();
     }

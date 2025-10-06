@@ -1,16 +1,11 @@
 package learn.configurations.Security;
 
-import javax.swing.text.DefaultEditorKit.CutAction;
-
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -20,10 +15,10 @@ import org.springframework.security.web.SecurityFilterChain;
  * which is authenticating through csrf token.
  */
 @EnableWebSecurity
-// @AllArgsConstructor
+@AllArgsConstructor
 public class SecurityConfig {
 
-    // private JWTAuthenticationFilter JWTAuthenticationFilter;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -31,7 +26,7 @@ public class SecurityConfig {
         /*
          * here we have configure the SecurityFilterChain where SecurityFilterChain is
          * the main reson for the request authentication
-         * 
+         *
          * To return SecurityFilterChain we have to use any implemented class of
          * SecurityFilterChain. HttpSecurity is one of the implemented class of
          * SecurityFilterChain(Polymorphism).
@@ -39,49 +34,44 @@ public class SecurityConfig {
 
         /*
          * if we are not using default security configs
-         * either we have send csrf token manually or make it disable
+         * either we have to send csrf token manually or make it disable
          * so that server don't expect csrf token to authenticate any request
-         * 
-         * adding authorizeHttpRequests make every requests secure means, every requests
-         * needs to be
-         * authenticated to give the response.
-         * 
-         * This will send formLogin UI to frontend whenver you try to hit any endpoints
          */
         http.csrf(custome -> custome.disable());
-        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
-        http.formLogin(Customizer.withDefaults());
-
         /*
-         * Below configuration when we JWT authentication with separte filter for
-         * request authentiation
+        authorizeRequests is used to configure what request should be authenticated,
+        what requests can be accessible without authentication.
          */
-        // http
-        // .csrf(AbstractHttpConfigurer::disable)
-        // .cors(AbstractHttpConfigurer::disable)
-        // .sessionManagement(session ->
-        // session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        // .authorizeHttpRequests(auth -> auth
-        // .requestMatchers("/auth/encodePwd/**").permitAll()
-        // .requestMatchers("/auth/authenticate").permitAll()
-        // .requestMatchers("/auth/register").permitAll()
-        // .anyRequest().authenticated())
-        // .exceptionHandling(ex -> ex.authenticationEntryPoint(new
-        // HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-        // .addFilterBefore(JWTAuthenticationFilter,
-        // UsernamePasswordAuthenticationFilter.class);
+        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
+        /*
+        formLogin sends UI a form to login with default values
+        or we can configure externally through db
+         */
+          // http.formLogin(Customizer.withDefaults());
+        /*
+        To enable the REST APIs excess we have to mention which security we are using
+        here we are going to use basic authentication like httpBasic
+         */
+//        http.httpBasic(Customizer.withDefaults());
+        /*
+        With the above configuration security become non-stateless means
+        once form login success it will generate a JSESSIONID which will be saved browser
+        cookie further requests will be sent by attaching JSESSIONID through browser,
+        since non-stateless it will save JSESSIONID to make it stateless
+        we can use below configuration.
+         */
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        /*
+        if we have @bean of UserDetailsService to authenticate username and password using basic auth
+        we can remove Customizer.withDefaults() inside httpBasic
+         */
+        http.httpBasic();
+        /*
+        if we have custom UserDetailsService to authenticate username and password using basic auth
+        we have mention where we are implementing by giving service class name
+         */
+        http.userDetailsService(userDetailsService);
 
         return http.build();
     }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
 }
