@@ -1,4 +1,4 @@
-package learn.configurations.Security.DTOs;
+package learn.testVTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

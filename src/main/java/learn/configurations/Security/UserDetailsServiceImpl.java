@@ -1,6 +1,11 @@
 package learn.configurations.Security;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,37 +13,39 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import learn.testRepo.UserRepo;
+import learn.testService.UserService;
+import learn.testVOs.UserVO;
+import learn.testVTOs.AuthRequest;
+import lombok.AllArgsConstructor;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+@AllArgsConstructor
+public class UserDetailsServiceImpl implements UserDetailsService, UserService {
 
-    private final PasswordEncoder passwordEncoder;
+    private UserRepo userRepo;
+    private PasswordEncoder passwordEncoder;
 
-    List<UserDetails> users = new ArrayList<>();
-    public UserDetailsServiceImpl(PasswordEncoder passwordEncoder){
-        this.passwordEncoder = passwordEncoder;
-        users = List.of(
-            createUser("prashanth", "user@123", "USER"),
-            createUser("admin", "admin@123", "ADMIN")
-        );
-    }
-
-    private UserDetails createUser(String username, String password, String role){
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserVO userVO = userRepo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
         return User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .roles(role)
+                .username(userVO.getUsername())
+                .password(userVO.getPassword())
+                .roles("USER")
                 .build();
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return users.stream()
-                .filter(user -> user.getUsername().equals(username))
-                .findFirst()
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    public UserVO saveUser(UserVO userVO) {
+        Optional<UserVO> optUserVO = userRepo.findByUsername(userVO.getUsername());
+        if (optUserVO.isPresent()) {
+            return optUserVO.get();
+        } else {
+            userVO.setPassword(passwordEncoder.encode(userVO.getPassword()));
+            return this.userRepo.save(userVO);
+        }
     }
+
 }

@@ -20,5 +20,16 @@ spring:
     user:
       name: user
       password: admin@123
+  datasource:
+    url: jdbc:mysql://localhost:3306/learning_schema?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver 
+    username: root
+    password: root
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5 
 
+  jpa:
+    hibernate:
+      ddl-auto: update
  

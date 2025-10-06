@@ -1,4 +1,4 @@
-package learn.configurations.Security.DTOs;
+package learn.testVTOs;
 
 public record AuthResponse(String token) {
 }
