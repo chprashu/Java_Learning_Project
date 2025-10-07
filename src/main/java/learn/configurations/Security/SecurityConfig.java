@@ -2,17 +2,15 @@ package learn.configurations.Security;
 
 import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import learn.configurations.Security.JWTAuth.JWTAuthFilter;
 
 @Configuration
 /*
@@ -24,7 +22,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @AllArgsConstructor
 public class SecurityConfig {
 
-    private UserDetailsService userDetailsService;
+    // private UserDetailsService userDetailsService;
+    private final JWTAuthFilter authFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,23 +43,27 @@ public class SecurityConfig {
          * so that server don't expect csrf token to authenticate any request
          */
         http.csrf(custome -> custome.disable());
+
         /*
          * authorizeRequests is used to configure what request should be authenticated,
          * what requests can be accessible without authentication.
          */
         http.authorizeHttpRequests(request -> request
-        		.requestMatchers("/auth/**").permitAll()
-        		.anyRequest().authenticated());
+                .requestMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated());
+
         /*
          * formLogin sends UI a form to login with default values
          * or we can configure externally through db
          */
         // http.formLogin(Customizer.withDefaults());
+
         /*
          * To enable the REST APIs excess we have to mention which security we are using
          * here we are going to use basic authentication like httpBasic
          */
         // http.httpBasic(Customizer.withDefaults());
+
         /*
          * With the above configuration security become non-stateless means
          * once form login success it will generate a JSESSIONID which will be saved
@@ -70,20 +73,35 @@ public class SecurityConfig {
          * we can use below configuration.
          */
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
         /*
          * if we have @bean of UserDetailsService to authenticate username and password
          * using basic auth
          * we can remove Customizer.withDefaults() inside httpBasic
          */
-        http.httpBasic(Customizer.withDefaults());
+        // http.httpBasic(Customizer.withDefaults());
+
         /*
          * if we have custom UserDetailsService to authenticate username and password
          * using basic auth
          * we have mention where we are implementing by giving service class name
          */
-        http.userDetailsService(userDetailsService);
+        // http.userDetailsService(userDetailsService);
+
+        /*
+         * When a request needs to be authenticate through the spring security, security
+         * asks UsernamePasswordAuthenticationFilter to do Authentication.
+         * But when we have token instead of username and password we have to specify
+         * which filter should do filteration when an request needs to authenticate,
+         * here the specified JWTAuthFilter is a class where filering will happen
+         * before UsernamePasswordAuthenticationFilte.
+         * 
+         * addFilterBefore() provides us, which filter should do its work before which
+         * filter we can any different filter also if we have multilevel filteration
+         */
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-    
+
 }
