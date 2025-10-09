@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -92,12 +93,12 @@ public class SecurityConfig {
          * When a request needs to be authenticate through the spring security, security
          * asks UsernamePasswordAuthenticationFilter to do Authentication.
          * But when we have token instead of username and password we have to specify
-         * which filter should do filteration when an request needs to authenticate,
-         * here the specified JWTAuthFilter is a class where filering will happen
+         * which filter should do filtration when an request needs to authenticate,
+         * here the specified JWTAuthFilter is a class where filtering will happen
          * before UsernamePasswordAuthenticationFilte.
          * 
          * addFilterBefore() provides us, which filter should do its work before which
-         * filter we can any different filter also if we have multilevel filteration
+         * filter we can any different filter also if we have multilevel filtration
          */
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 

@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@Slf4j
 @RequestMapping("/test")
+@Slf4j
 public class TestController {
 
-    @GetMapping("/")
+    @GetMapping("/exceptionApi")
     public ResponseEntity<String> testMethod() {
         try {
             int i = 1 / 0;
             return new ResponseEntity<String>("working  " + i, HttpStatus.OK);
         } catch (Exception e) {
             log.error(e.getMessage());
-            return new ResponseEntity<String>("Not working", HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<String>("Not working", HttpStatus.BAD_REQUEST);
         }
     }
 

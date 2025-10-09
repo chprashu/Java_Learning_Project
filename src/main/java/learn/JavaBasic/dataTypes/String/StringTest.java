@@ -19,11 +19,10 @@ public class StringTest {
          * Using == to compare two different strings with the same content will return
          * unless both references point to the same object in memory.
          * The intern() method returns a canonical representation for the string
-         * object,
-         * which means it returns a reference to the unique string from the string
-         * pool
-         * that has the same contents. If such a string does not exist in the pool,
-         * it is added. This ensures that all equal strings share the same memory
+         * object, which means it returns a reference to the unique string from the
+         * string pool that has the same contents. If such a string does not exist in
+         * the pool, it is added. This ensures that all equal strings share the same
+         * memory
          * reference.
          */
         System.out.println(str == str.intern()); // true because str.intern() returns

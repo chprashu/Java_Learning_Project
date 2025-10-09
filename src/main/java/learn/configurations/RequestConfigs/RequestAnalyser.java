@@ -24,13 +24,13 @@ public class RequestAnalyser extends OncePerRequestFilter {
         long start = System.currentTimeMillis();
         try {
             filterChain.doFilter(request, response);
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
         } finally {
             long duration = System.currentTimeMillis() - start;
             String message = request.getMethod() + " " + request.getRequestURI() + " " + response.getStatus() + " "
                     + (duration / 1000) + "s";
+
+            if (response.getStatus() >= 400)
+                log.error(message);
             if (duration > MAX_TIME) {
                 log.warn(message);
             } else {
