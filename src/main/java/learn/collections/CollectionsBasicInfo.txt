@@ -1,0 +1,92 @@
+
+collection framework introduced after JDK 1.2 
+before JDK 1.2 java uses Stack, Hashtable, Vector, arrays 
+to manipulate the group of objects
+
+Drowbacks which java faced without collection framework.
+* inconsitency
+* Lack of inter-operability
+* No common interfaces
+
+
+What is collection framework?
+    * its an collection of interfaces and classes within the java.util package.
+    * Using them we can store, retrive and manipulate the group objects.
+
+advantages of collection framework:
+    * Unified architecture
+    * inter-operability
+    * Reusability
+    * Efficiency
+
+Collection key interfaces
+1. Collection: root interface of all collection interfaces.
+2. List: A Collection that holds elements in order and allows duplicate elements.
+3. Set: A Collection that cannot contains duplicate elements.
+4. Queue: A Collection designed to hold prior to processing (e.g PriorityQueue, LinkedList when used a queue)
+5. Deque: A double-ended queue that allows insertion and removal from both ends.
+6. Map:  An interface that represents collection of objects in key and value pair.
+
+Complete Collection Hirarchy will be like this:
+
+    Iterable (interface)
+
+       * Collection (interface)
+
+            1. List (interface)
+                * ArrayList 
+                * LinkedList 
+                * Vector
+                * Stack 
+                * CopyOnWriteArrayList
+
+            2. Set (interface)
+                * HashSet
+                * LinkedHashSet
+                * TreeSet
+                * EnumSet
+                * ConcurrentSkipList
+                * SortedSet
+                * CopyOnWriteArrayList
+
+            3. Queue (interface)
+                * LinkedList
+                * PriorityQueue
+                * BlockingQueue
+                * ArrayBlockingQueue
+                * LinkedBlockingQueue
+                * PriorityBlockingQueue
+                * SynchonousQueue
+                * DelayQueue
+                * ConcurrentLinkedQueue
+
+                * Deque
+
+                    1. ArrayDeque
+                    2. LinkedList
+                    3. ConcurrentLinked
+                    4. Deque
+
+
+Default methods in collection which needs to be implement:
+
+int size():  to check the size of stores elements in collection.
+boolean isEmpty(): 
+boolean contains(Obj o):  returns if provided element is there in collection or not
+Iterator<E> iterator(): Returns an iterator over the elements in this list in proper sequence.
+Object[] toArray(): converts collection to array.
+<T> T[] toArray(T[] a): returns arrays of specified type
+boolean add(E e): * this method helps to add element to collection, returns boolean value based on type of collection
+                * retuns true if element is already there or newly adding
+                * return false when we try to add same element which is already there in collection, for collections
+                which are not allow duplicate elements.
+
+
+
+
+
+                
+
+
+
+
