@@ -1,5 +1,5 @@
 List: 
     * collects the group of elements in ordered way.
     * allows duplicate elements to store.
-    * since it store orderely we can fetch by index
-    * 
+    * Index-based Access.
+    * List grows dynamically by adding elements.
