@@ -1,5 +1,6 @@
 package learn.configurations.Security;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.core.userdetails.User;
@@ -35,12 +36,23 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserVO saveUser(UserVO userVO) {
         Optional<UserVO> optUserVO = userRepo.findByUsername(userVO.getUsername());
+        UserVO vo = userVO;
         if (optUserVO.isPresent()) {
-            return optUserVO.get();
-        } else {
-            userVO.setPassword(passwordEncoder.encode(userVO.getPassword()));
-            return this.userRepo.save(userVO);
+            vo = optUserVO.get();
         }
+        vo.setPassword(passwordEncoder.encode(userVO.getPassword()));
+        return userRepo.save(vo);
+    }
+
+    @Override
+    public UserVO getUser(String username){
+        return userRepo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User with username: "+username+" not found!"));
+    }
+
+    @Override
+    public List<UserVO> getAllUsers() {
+        return userRepo.findAll();
     }
 
 }
