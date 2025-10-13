@@ -16,6 +16,8 @@ management:
     port: 7503
 
 spring:
+  main:
+    allow-circular-references: true
   security:
     user:
       name: user
@@ -34,11 +36,13 @@ spring:
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5
+
    
 
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
 
 
 JWT_SECRET_KEY: thisIsSpringBootLearningProject2025aaewer123235454rqwaawdh

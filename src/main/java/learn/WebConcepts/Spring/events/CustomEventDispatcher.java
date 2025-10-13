@@ -1,18 +1,23 @@
 package learn.WebConcepts.Spring.events;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
 
 @Component
-public class CutomEventDispatcher implements ApplicationListener<EventParams>, InitializingBean {
+@Slf4j
+public class CustomEventDispatcher implements ApplicationListener<EventParams>, InitializingBean {
 
     @Autowired
     private ListableBeanFactory factory;
@@ -24,6 +29,10 @@ public class CutomEventDispatcher implements ApplicationListener<EventParams>, I
         Map<String, Object> beans = factory.getBeansWithAnnotation(Component.class);
 
         for (Object bean : beans.values()) {
+
+            if(bean instanceof CustomEventDispatcher)
+                continue;
+
             for (Method method : bean.getClass().getDeclaredMethods()) {
                 if (method.isAnnotationPresent(CustomEventListener.class)) {
                     CustomEventListener listener = method.getAnnotation(CustomEventListener.class);
@@ -45,26 +54,16 @@ public class CutomEventDispatcher implements ApplicationListener<EventParams>, I
         if (list != null) {
             for (EventHandler entry : list) {
                 try {
-                    entry.method.setAccessible(true);
-                    if (entry.method.getParameterCount() == 1) {
-                        entry.method.invoke(entry.bean, event);
+                    entry.method().setAccessible(true);
+                    if (entry.method().getParameterCount() == 1) {
+                        entry.method().invoke(entry.bean(), event);
                     } else {
-                        entry.method.invoke(entry.bean);
+                        entry.method().invoke(entry.bean());
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 }
             }
-        }
-    }
-
-    private static class EventHandler {
-        final Object bean;
-        final Method method;
-
-        EventHandler(Object bean, Method method) {
-            this.bean = bean;
-            this.method = method;
         }
     }
 

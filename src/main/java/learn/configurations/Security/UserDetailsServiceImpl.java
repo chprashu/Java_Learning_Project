@@ -3,6 +3,8 @@ package learn.configurations.Security;
 import java.util.List;
 import java.util.Optional;
 
+import learn.testConstants.RedisContants;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -51,6 +53,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    @Cacheable(cacheNames = RedisContants.FETCH_USERS, key = RedisContants.USER)
     public List<UserVO> getAllUsers() {
         return userRepo.findAll();
     }
