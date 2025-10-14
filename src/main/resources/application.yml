@@ -16,8 +16,11 @@ management:
     port: 7503
 
 spring:
+
   main:
     allow-circular-references: true
+
+  # security configuration
   security:
     user:
       name: user
@@ -28,6 +31,8 @@ spring:
           google:
             client-id: 382025911581-6c7r5k7ho9ef5vknn227fobrc8ltau0g.apps.googleusercontent.com
             client-secret: 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
+
+  # database connection URL, username and password.
   datasource:
     url: jdbc:mysql://localhost:3306/learning_schema?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver 
@@ -37,15 +42,22 @@ spring:
       maximum-pool-size: 20
       minimum-idle: 5
 
-   
-
+  # jpa configurations
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
 
+  # redis configurations
+  data:
+    redis:
+      port: 6379
+      host: 127.0.0.1
+
 
 JWT_SECRET_KEY: thisIsSpringBootLearningProject2025aaewer123235454rqwaawdh
+
+
 
 
 

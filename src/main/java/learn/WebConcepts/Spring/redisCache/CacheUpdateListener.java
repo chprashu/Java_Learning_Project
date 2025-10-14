@@ -1,6 +1,5 @@
-package learn.WebConcepts.Spring.events;
+package learn.WebConcepts.Spring.redisCache;
 
-import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -8,10 +7,9 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface CustomEventListener {
+public @interface CacheUpdateListener {
 
-    String eventName();
+    String cacheName();
 
     String key();
 }
