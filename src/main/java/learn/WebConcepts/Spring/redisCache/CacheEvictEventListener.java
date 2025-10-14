@@ -1,9 +1,7 @@
 package learn.WebConcepts.Spring.redisCache;
 
-import org.apache.catalina.core.ApplicationPushBuilder;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CacheEvictEventListener {
 	
 	private final CacheManager cacheManager;
-	private final ApplicationEventPublisher publisher;
+//	private final ApplicationEventPublisher publisher;
 	
 	
 	@SuppressWarnings("null")
@@ -34,8 +32,9 @@ public class CacheEvictEventListener {
 			cache.evict(key);
 			builder.append(" and key: "+key);
 		}
+		log.info(builder.toString());
 		
-		publisher.publishEvent(new CacheUpdateEventArgs(this, cacheName, key));
+//		publisher.publishEvent(new CacheUpdateEventArgs(this, cacheName, key));
 	}
 	
 	
