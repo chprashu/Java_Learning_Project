@@ -3,7 +3,6 @@ package learn.configurations.Security;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.boot.autoconfigure.cache.CacheProperties.Redis;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -65,7 +64,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService {
     @CacheUpdateListener(cacheName = RedisContants.FETCH_USERS, key = RedisContants.USER)
     @Cacheable(cacheNames = RedisContants.FETCH_USERS, key = RedisContants.USER)
     public List<UserVO> getAllUsers() {
-    	log.info("getting users from DB");
+        log.info("getting users from DB");
         return userRepo.findAll();
     }
 
