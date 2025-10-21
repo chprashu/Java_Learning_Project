@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @SuppressWarnings("null")
 public class RequestAnalyser extends OncePerRequestFilter {
 
-    private static final long MAX_TIME = 0; // 30 sec
+    private static final long MAX_TIME = 30 * 1000; // 30 sec
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -29,12 +29,14 @@ public class RequestAnalyser extends OncePerRequestFilter {
             String message = request.getMethod() + " " + request.getRequestURI() + " " + response.getStatus() + " "
                     + (duration / 1000) + "s";
 
-            if (response.getStatus() >= 400)
-                log.error(message);
             if (duration > MAX_TIME) {
                 log.warn(message);
-            } else {
-                log.info(message);
+            }else{
+                if (response.getStatus() >= 400){
+                    log.error(message);
+                }else{
+                    log.info(message);
+                }
             }
         }
 

@@ -1,9 +1,12 @@
 package learn.configurations.Security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import learn.exceptions.ErrorResponse;
 import lombok.AllArgsConstructor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -87,6 +90,32 @@ public class SecurityConfig {
          * we have mention where we are implementing by giving service class name
          */
         // http.userDetailsService(userDetailsService);
+
+        /*
+         * Exception Handling, which are occurred while filtering request
+         */
+        http.exceptionHandling(ex -> ex
+                .authenticationEntryPoint((request, response, e)->{
+                    ErrorResponse errorResponse = new ErrorResponse(
+                      e.getMessage(),
+                      e.toString(),
+                      request.getRequestURI()
+                    );
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                    response.setContentType("application/json");
+                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+                })
+                .accessDeniedHandler((request, response, e)->{
+                    ErrorResponse errorResponse = new ErrorResponse(
+                            e.getMessage(),
+                            e.toString(),
+                            request.getRequestURI()
+                    );
+                    response.setStatus(HttpStatus.BAD_REQUEST.value());
+                    response.setContentType("application/json");
+                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+                })
+        );
 
         /*
          * When a request needs to be authenticate through the spring security, security

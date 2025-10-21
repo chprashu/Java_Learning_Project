@@ -1,0 +1,96 @@
+
+Parent of Exception Hierarchy:
+java.lang.Object
+ └── java.lang.Throwable
+      ├── java.lang.Error
+      └── java.lang.Exception
+
+Checked Exceptions: Java force you to handle these Exceptions
+either by (try..catch) or declaring with throw
+java.lang.Exception
+ ├── java.io.IOException
+ │    ├── java.io.EOFException
+ │    ├── java.io.FileNotFoundException
+ │    ├── java.io.InterruptedIOException
+ │    ├── java.net.MalformedURLException
+ │    ├── java.net.ProtocolException
+ │    ├── java.net.SocketException
+ │    │    ├── java.net.BindException
+ │    │    ├── java.net.ConnectException
+ │    │    ├── java.net.NoRouteToHostException
+ │    │    └── java.net.PortUnreachableException
+ │    ├── java.net.UnknownHostException
+ │    ├── java.net.UnknownServiceException
+ │    └── java.nio.file.FileSystemException
+ │         ├── java.nio.file.AccessDeniedException
+ │         ├── java.nio.file.DirectoryNotEmptyException
+ │         ├── java.nio.file.NoSuchFileException
+ │         └── java.nio.file.FileAlreadyExistsException
+ │
+ ├── java.sql.SQLException
+ │    ├── java.sql.BatchUpdateException
+ │    ├── java.sql.SQLClientInfoException
+ │    ├── java.sql.SQLNonTransientException
+ │    ├── java.sql.SQLRecoverableException
+ │    ├── java.sql.SQLTransientException
+ │    └── java.sql.SQLWarning
+ │
+ ├── java.lang.ClassNotFoundException
+ ├── java.lang.CloneNotSupportedException
+ ├── java.lang.InterruptedException
+ ├── java.lang.NoSuchFieldException
+ ├── java.lang.NoSuchMethodException
+ ├── java.text.ParseException
+ └── java.util.concurrent.ExecutionException
+
+UnChecked Exceptions: UnChecked Exceptions are not checked at compile time,
+they represent programming error or bugs which can be raised on runtime.
+java.lang.RuntimeException
+ ├── java.lang.ArithmeticException
+ ├── java.lang.ArrayStoreException
+ ├── java.lang.ClassCastException
+ ├── java.lang.EnumConstantNotPresentException
+ ├── java.lang.IllegalArgumentException
+ │    ├── java.lang.NumberFormatException
+ ├── java.lang.IllegalCallerException
+ ├── java.lang.IllegalMonitorStateException
+ ├── java.lang.IllegalStateException
+ │    ├── java.lang.ConcurrentModificationException
+ │    ├── java.lang.IllegalComponentStateException
+ │    └── java.lang.UnsupportedOperationException
+ ├── java.lang.IndexOutOfBoundsException
+ │    ├── java.lang.ArrayIndexOutOfBoundsException
+ │    ├── java.lang.StringIndexOutOfBoundsException
+ ├── java.lang.NegativeArraySizeException
+ ├── java.lang.NullPointerException
+ ├── java.lang.SecurityException
+ ├── java.lang.TypeNotPresentException
+ ├── java.lang.UnsupportedOperationException
+ ├── java.util.ConcurrentModificationException
+ ├── java.util.EmptyStackException
+ ├── java.util.NoSuchElementException
+ ├── java.util.IllegalFormatException
+ └── java.time.DateTimeException
+
+Errors:
+java.lang.Error
+ ├── java.lang.AssertionError
+ ├── java.lang.LinkageError
+ │    ├── java.lang.ClassCircularityError
+ │    ├── java.lang.ClassFormatError
+ │    ├── java.lang.IncompatibleClassChangeError
+ │    │    ├── java.lang.AbstractMethodError
+ │    │    ├── java.lang.IllegalAccessError
+ │    │    ├── java.lang.InstantiationError
+ │    │    ├── java.lang.NoSuchFieldError
+ │    │    ├── java.lang.NoSuchMethodError
+ │    ├── java.lang.UnsatisfiedLinkError
+ │    └── java.lang.VerifyError
+ ├── java.lang.VirtualMachineError
+ │    ├── java.lang.InternalError
+ │    ├── java.lang.OutOfMemoryError
+ │    ├── java.lang.StackOverflowError
+ │    ├── java.lang.UnknownError
+ │    └── java.lang.ThreadDeath
+ └── java.lang.ServiceConfigurationError
+

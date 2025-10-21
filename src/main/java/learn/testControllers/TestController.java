@@ -1,5 +1,7 @@
 package learn.testControllers;
 
+import learn.testService.TestService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -16,17 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @RequestMapping("/test")
 @Slf4j
+@AllArgsConstructor
 public class TestController {
+
+    private TestService testService;
 
     @GetMapping("/exceptionApi")
     public ResponseEntity<String> testMethod() {
-        try {
-            int i = 1 / 0;
-            return new ResponseEntity<String>("working  " + i, HttpStatus.OK);
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            return new ResponseEntity<String>("Not working", HttpStatus.BAD_REQUEST);
-        }
+        testService.divide();
+        return new ResponseEntity<String>("working", HttpStatus.OK);
     }
 
     @GetMapping("/apiTest")
