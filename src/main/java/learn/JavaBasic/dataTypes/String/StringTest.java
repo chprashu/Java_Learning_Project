@@ -7,13 +7,15 @@ public class StringTest {
     public static void main(String[] args) {
 
         String str = "Hello, World!"; // String literal saved in String pool
-        str = "ahduygweu"; // new String literal, new memory location in String pool
+        // str = "ahduygweu"; // new String literal, new memory location in String pool
         int a = 10;
         String str1 = new String("Hello, World!"); // String object created in heap
 
-        System.out.println(str == str1); // false because they reference different
-        // memory locations
-        System.out.println(str.equals(str1)); // true because their content is the
+        // false because they reference different memory locations
+        System.out.println("Comparing strings with ==: " + (str == str1));
+
+        // true because their content is same
+        System.out.println("Comparing strings with equals(): " + (str.equals(str1)));
 
         /*
          * Using == to compare two different strings with the same content will return
@@ -25,7 +27,7 @@ public class StringTest {
          * memory
          * reference.
          */
-        System.out.println(str == str.intern()); // true because str.intern() returns
+        System.out.println((str == str1.intern()) + ", Comparing two string with intern()");
         // the reference from the String pool
 
         Student student = new Student();
