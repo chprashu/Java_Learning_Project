@@ -2,7 +2,8 @@ package learn.Maps;
 
 public class MapToHandleRequest {
 
-    private static final String LOG_FILE_PATH = "src/main/resources/Files/spring_boot_style_log_with_request_method.txt";
+    // private static final String LOG_FILE_PATH =
+    // "src/main/resources/Files/spring_boot_style_log_with_request_method.txt";
 
     public static void main(String[] args) {
         // BufferedReader reader;

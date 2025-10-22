@@ -2,14 +2,11 @@ package learn.exceptions;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
-
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
 @NoArgsConstructor
-public class ErrorResponse{
+public class ErrorResponse {
 
     private final Date timeStamp = new Date();
     private String message;
