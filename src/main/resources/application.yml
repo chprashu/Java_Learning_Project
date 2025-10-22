@@ -54,6 +54,12 @@ spring:
       port: 6379
       host: 127.0.0.1
 
+  # rabbitMq configurations
+  rabbitMq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 JWT_SECRET_KEY: thisIsSpringBootLearningProject2025aaewer123235454rqwaawdh
 
