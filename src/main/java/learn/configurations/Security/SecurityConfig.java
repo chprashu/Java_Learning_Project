@@ -103,7 +103,8 @@ public class SecurityConfig {
                     );
                     response.setStatus(HttpStatus.UNAUTHORIZED.value());
                     response.setContentType("application/json");
-                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+//                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+                    response.getWriter().write(errorResponse.toString());
                 })
                 .accessDeniedHandler((request, response, e)->{
                     ErrorResponse errorResponse = new ErrorResponse(
@@ -113,7 +114,8 @@ public class SecurityConfig {
                     );
                     response.setStatus(HttpStatus.BAD_REQUEST.value());
                     response.setContentType("application/json");
-                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+//                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+                    response.getWriter().write(errorResponse.toString());
                 })
         );
 

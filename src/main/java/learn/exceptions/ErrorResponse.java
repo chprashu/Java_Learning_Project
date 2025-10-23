@@ -23,4 +23,14 @@ public class ErrorResponse {
         this.details = details;
         this.path = path;
     }
+
+    @Override
+    public String toString() {
+        return "ErrorResponse{" +
+                "timeStamp=" + timeStamp +
+                ", message='" + message + '\'' +
+                ", details='" + details + '\'' +
+                ", path='" + path + '\'' +
+                '}';
+    }
 }
