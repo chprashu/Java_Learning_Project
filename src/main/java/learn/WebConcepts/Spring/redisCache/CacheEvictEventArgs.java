@@ -9,12 +9,11 @@ import lombok.Getter;
 public class CacheEvictEventArgs extends ApplicationEvent {
 
 	private String cacheName;
-	
+
 	private String key;
-	
+
 	private boolean isSpclKey;
-	
-	
+
 	public CacheEvictEventArgs(Object source, String cacheName, String key, boolean isSpclKey) {
 		super(source);
 		this.cacheName = cacheName;
@@ -22,5 +21,4 @@ public class CacheEvictEventArgs extends ApplicationEvent {
 		this.isSpclKey = isSpclKey;
 	}
 
-	
 }
