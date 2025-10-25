@@ -1,6 +1,5 @@
 package learn.configurations.Security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import learn.exceptions.ErrorResponse;
 import lombok.AllArgsConstructor;
 
