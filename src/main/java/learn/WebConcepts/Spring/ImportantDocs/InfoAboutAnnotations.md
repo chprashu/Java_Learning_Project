@@ -5,9 +5,7 @@
     ## Alias Syntax (Inheritance of Component class):
         @AliasFor(
             annotation = Component.class
-        )
-
-
+        }
 
 ## @Controller/@RestController
 * These annotations Alias the **@Component** to create beans of Controller classes
@@ -20,8 +18,8 @@
 * @Repository is an alias of **@Component**, we can replace @Repository with **@Component** unless i won't get any Exeception.
 * Additional feature of @Repository is, It can convert any Checked Exceptions into DataAccessException which are getting 
 while persisting any table data.
-* Even if an exception occures, adding **@Component** annotation will still make it work. However, you will receive the default 
-exception that are associated with the PersistanceException class.
+* Even if an exception occurs, adding **@Component** annotation will still make it work. However, you will receive the default 
+exception that are associated with the PersistenceException class.
 
 ## @Bean
 * This is a method level annotation where return type will be an Object with some pre-Object-creation configurations.
@@ -36,7 +34,7 @@ configurations, meaning Spring creates and manages a single shared instance for 
 ## Difference between @Controller vs @RestController
 * This difference will give the clear picture of **@RestController** and **@Controller**.
     ## @RestController:
-    * It return data directly in Response Body
+    * It returns data directly in Response Body
     * **@RestController** is a combination of **@Controller** and **@ResponseBody**. 
     * No need of ViewResolver
 
@@ -52,8 +50,8 @@ configurations, meaning Spring creates and manages a single shared instance for 
 * It tells handler methods to send data as **HttpResponse** instead of passing data to **** 
 because ViesResolver find jsp, json, html, etc.. files with name returning from the controller method
 
-## Difference between @PathVaribale vs @RequestParam.
-* This will clears where to use **@PathVaribal** & **@RequestParam**.
+## Difference between @PathVariable vs @RequestParam.
+* This will clear where to use **@PathVariable** & **@RequestParam**.
     # @RequestParam:
     * helps to extract query params from the URL.
     * It is used for optional parameters, filters and pagination logic.
@@ -61,8 +59,8 @@ because ViesResolver find jsp, json, html, etc.. files with name returning from 
             localhost:8080/user/getUser?id=1&name=harry 
             .../fndByNameandDepartment?name=name&department=department
 
-    # @PathVaribale
-    * extarct value directly from URL path.
+    # @PathVariable
+    * Extract value directly from URL path.
     * It is used for Identifiers that uniquely locate a resource.
         #
             localhost:8080/user/getUser/1
