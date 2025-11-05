@@ -52,6 +52,7 @@ public class SecurityConfig {
          */
         http.authorizeHttpRequests(request -> request
                 .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/test/**").permitAll()
                 .anyRequest().authenticated());
 
         /*
@@ -91,32 +92,33 @@ public class SecurityConfig {
         // http.userDetailsService(userDetailsService);
 
         /*
+         * 
+         */
+
+        /*
          * Exception Handling, which are occurred while filtering request
          */
         http.exceptionHandling(ex -> ex
-                .authenticationEntryPoint((request, response, e)->{
-                    ErrorResponse errorResponse = new ErrorResponse(
-                      e.getMessage(),
-                      e.toString(),
-                      request.getRequestURI()
-                    );
-                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                    response.setContentType("application/json");
-//                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
-                    response.getWriter().write(errorResponse.toString());
-                })
-                .accessDeniedHandler((request, response, e)->{
+                .authenticationEntryPoint((request, response, e) -> {
                     ErrorResponse errorResponse = new ErrorResponse(
                             e.getMessage(),
                             e.toString(),
-                            request.getRequestURI()
-                    );
-                    response.setStatus(HttpStatus.BAD_REQUEST.value());
+                            request.getRequestURI());
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
                     response.setContentType("application/json");
-//                    new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+                    // new ObjectMapper().writeValue(response.getWriter(), errorResponse);
                     response.getWriter().write(errorResponse.toString());
                 })
-        );
+                .accessDeniedHandler((request, response, e) -> {
+                    ErrorResponse errorResponse = new ErrorResponse(
+                            e.getMessage(),
+                            e.toString(),
+                            request.getRequestURI());
+                    response.setStatus(HttpStatus.BAD_REQUEST.value());
+                    response.setContentType("application/json");
+                    // new ObjectMapper().writeValue(response.getWriter(), errorResponse);
+                    response.getWriter().write(errorResponse.toString());
+                }));
 
         /*
          * When a request needs to be authenticate through the spring security, security

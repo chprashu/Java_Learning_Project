@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/test")
@@ -34,6 +35,14 @@ public class TestController {
     @GetMapping("/apiTest")
     public String getMethodName(HttpServletRequest request) {
         return "working with ID: " + request.getSession().getId();
+    }
+
+    private record Response(String status, Integer code) {
+    }
+
+    @GetMapping("/apiTest/json")
+    public Response testApiBySendingJson() {
+        return new Response("Success", 200);
     }
 
     @GetMapping("/csrfTest")
