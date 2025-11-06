@@ -1,43 +1,42 @@
 package learn.DSA.LearnArrays;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BasicStringProblems {
 
-    public static String reverseString(String str){
+    public static String reverseString(String str) {
         StringBuilder reversed = new StringBuilder("");
-        for(int i = str.length() - 1; i >= 0; i--){
+        for (int i = str.length() - 1; i >= 0; i--) {
             reversed.append(str.charAt(i));
         }
         return reversed.toString();
     }
 
-    public static boolean checkPallindrom(String str){
+    public static boolean checkPallindrom(String str) {
         StringBuilder sb = new StringBuilder(str);
-        if(sb.reverse().toString().equals(str)){
+        if (sb.reverse().toString().equals(str)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public static void countOccurance(String str, char ch){
+    public static void countOccurance(String str, char ch) {
         int count = 0;
-        for(char c: str.toCharArray()){
-            if(c == ch){
+        for (char c : str.toCharArray()) {
+            if (c == ch) {
                 count++;
             }
         }
         System.out.println(count);
     }
 
-    public static void removeDuplicate(String str){
+    public static void removeDuplicate(String str) {
         StringBuilder res = new StringBuilder("");
-        for(int i = 0; i < str.length(); i++){
-            if(!res.toString().contains(String.valueOf(str.charAt(i)))){
+        for (int i = 0; i < str.length(); i++) {
+            if (!res.toString().contains(String.valueOf(str.charAt(i)))) {
                 res.append(str.charAt(i));
             }
         }
@@ -45,12 +44,12 @@ public class BasicStringProblems {
         System.out.println(res.toString());
     }
 
-    public static void countVowelsConsonants(String str){
+    public static void countVowelsConsonants(String str) {
         int vowels = 0;
         int consonants = 0;
 
-        for(char c: str.toCharArray()){
-            if(Character.isLetter(c)) {
+        for (char c : str.toCharArray()) {
+            if (Character.isLetter(c)) {
                 if ("aeiou".indexOf(c) != -1) {
                     vowels++;
                 } else {
@@ -59,29 +58,29 @@ public class BasicStringProblems {
             }
         }
 
-        System.out.println("Vowels: "+vowels+" Consonants: "+consonants);
+        System.out.println("Vowels: " + vowels + " Consonants: " + consonants);
     }
 
-    public static void firstNonRepeatedChar(String str){
+    public static void firstNonRepeatedChar(String str) {
         Map<Character, Integer> map = new LinkedHashMap<>();
-        for(char c: str.toCharArray()){
+        for (char c : str.toCharArray()) {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        for(Map.Entry<Character, Integer> ch: map.entrySet()){
-            if(ch.getValue() == 1){
+        for (Map.Entry<Character, Integer> ch : map.entrySet()) {
+            if (ch.getValue() == 1) {
                 System.out.println(String.valueOf(ch.getKey()));
                 break;
             }
         }
     }
 
-    public static void countWordsInSentence(String str){
+    public static void countWordsInSentence(String str) {
         String[] words = str.trim().split("\\s+");
         System.out.println(words.length);
     }
 
-    public static void checkAnagram(String str1, String str2){
+    public static void checkAnagram(String str1, String str2) {
         char[] a = str1.toCharArray();
         char[] b = str2.toCharArray();
         Arrays.sort(a);
