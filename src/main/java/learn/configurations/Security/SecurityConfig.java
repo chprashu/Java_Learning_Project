@@ -3,6 +3,8 @@ package learn.configurations.Security;
 import learn.exceptions.ErrorResponse;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import learn.configurations.Security.JWTAuth.JWTAuthFilter;
 
@@ -92,8 +97,9 @@ public class SecurityConfig {
         // http.userDetailsService(userDetailsService);
 
         /*
-         * 
+         * Here we are configuring cors for cross origin requests
          */
+        http.cors(cors -> cors.configurationSource(corsConfiguration()));
 
         /*
          * Exception Handling, which are occurred while filtering request
@@ -134,6 +140,17 @@ public class SecurityConfig {
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfiguration() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }
