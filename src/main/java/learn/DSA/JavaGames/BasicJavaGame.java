@@ -40,6 +40,24 @@ public class BasicJavaGame {
 
         if (num == input) {
             System.out.println("Match Darw..");
+        } else if (num == 1) {
+            if (input == 2) {
+                System.out.println("You loss..");
+            } else if (input == 3) {
+                System.out.println("You win..");
+            }
+        } else if (num == 2) {
+            if (input == 1) {
+                System.out.println("You win..");
+            } else if (input == 3) {
+                System.out.println("You loss..");
+            }
+        } else if (num == 3) {
+            if (input == 1) {
+                System.out.println("You win..");
+            } else if (input == 2) {
+                System.out.println("You loss..");
+            }
         }
 
     }
